@@ -1,7 +1,5 @@
 #!/system/bin/sh
 
-# Do Customizations
-
 # Remount filesystems RW
 
 busybox mount -o remount,rw /
@@ -22,7 +20,7 @@ echo "1000000" > /sys/devices/system/cpu/cpu0/cpufreq/cpuinfo_max_freq
 
 echo "2048" > /sys/devices/virtual/bdi/179:0/read_ahead_kb
 
-# Set the perfect timer for the hardware keyboard. Thanks theimpaler747.
+# mkasick's recommended keyboard delay
 
 echo "5" > /sys/devices/platform/s3c-keypad/timer_delay
 
@@ -63,12 +61,6 @@ if [ ! -f "/system/etc/group" ]; then
 	echo "root::0:" > /system/etc/group
 	chmod 0666 /system/etc/group
 fi
-
-#ensure Superuser is installed to protect root access
-
-# if [ ! -f "/system/app/Superuser.apk" -a ! -f "/data/app/Superuser.apk" ]; then
-# 	cp /sbin/Superuser.apk /system/app/Superuser.apk
-# fi
 
 # fix busybox DNS while system is read-write
 
