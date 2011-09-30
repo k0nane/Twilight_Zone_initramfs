@@ -130,12 +130,12 @@ loglevel 3
 
 # mount mtd partitions
     # Mount /system rw first to give the filesystem a chance to save a checkpoint
-	mount ext4 /dev/block/stl9 /system noatime nodiratime check=n errors=continue nobh data=writeback barrier=0 discard noauto_da_alloc
+	mount ext4 /dev/block/stl9 /system noatime nodiratime nodelalloc check=n errors=continue nobh data=writeback barrier=0 discard noauto_da_alloc
 	mount rfs /dev/block/stl9 /system ro check=no
 
     # We chown/chmod /data again so because mount is run as root + defaults
 
-	mount ext4 /dev/block/stl10 /data nosuid nodev noatime nodiratime check=n errors=continue nobh discard data=writeback barrier=0 noauto_da_alloc
+	mount ext4 /dev/block/stl10 /data noatime nodiratime nodelalloc data=ordered barrier=0 noauto_da_alloc
 	mount rfs /dev/block/stl10 /data nosuid nodev check=no
 
 # [Yongha for Victory WiMAX 20100208
@@ -302,17 +302,9 @@ loglevel 3
     insmod /modules/pvrsrvkm.ko
     insmod /modules/s3c_lcd.ko
     insmod /modules/s3c_bc.ko
-    #insmod /modules/bc_example.ko
 
-    # load FM Radio module
-
-    #insmod /lib/modules/Si4709_driver.ko
     insmod /lib/modules/vibrator.ko
     insmod /lib/modules/melfas_touchkey.ko
-
-# Load TCPMSS clamping
-# Compiled into kernel
-#    insmod /lib/modules/xt_TCPMSS.ko
 
 #all operation with rootfs should be finished here, root partition will mounted read-only . d.moskvitin
 
